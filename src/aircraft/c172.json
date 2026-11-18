@@ -33,7 +33,7 @@
     "maxRpm": 2700,
     "propDiameterMeters": 1.93,
     "throttleTauSeconds": 0.45,
-    "pFactorYawCoeff": 0.008
+    "pFactorYawCoeff": 0.0012
   },
   "vSpeedsKnots": {
     "Vso": 40,

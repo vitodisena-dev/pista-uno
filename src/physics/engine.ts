@@ -95,11 +95,11 @@ export function stepEngine(
 
   const thrustNewtons = Math.max(0, Math.min(thrustFromStaticModel, thrustFromPower + 140 * effectiveThrottle));
 
-  // 5. Efecto de la hélice (estela espiral y P-factor): tiende a desviar la nariz a la izquierda (+Yaw rad/s en cuerpo)
-  // Más notorio a alta potencia y baja/media velocidad (durante la carrera de despegue y ascenso).
-  const lowSpeedFactor = Math.max(0.25, 1.0 - Math.min(1.0, airspeedMps / 55.0) * 0.65);
-  const propYawMomentNm = thrustNewtons * config.pFactorYawCoeff * lowSpeedFactor * 8.5;
-  const propRollMomentNm = -thrustNewtons * 0.018 * effectiveThrottle;
+  // 5. Efecto de la hélice (estela espiral y P-factor): muy sutil para que el avión pueda acelerar
+  // casi recto en la pista sin desviarse bruscamente a la izquierda.
+  const lowSpeedFactor = Math.max(0.15, 1.0 - Math.min(1.0, airspeedMps / 55.0) * 0.65);
+  const propYawMomentNm = thrustNewtons * config.pFactorYawCoeff * lowSpeedFactor * 1.5;
+  const propRollMomentNm = -thrustNewtons * 0.002 * effectiveThrottle;
 
   return {
     effectiveThrottle,

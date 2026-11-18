@@ -181,9 +181,9 @@ export function computeLandingGearForces(
       const forwardSmooth = Math.tanh(vWheelForward * 3.5);
       const forceWheelForward = -normalForceN * longitudinalMu * forwardSmooth;
 
-      // Rigidez lateral del neumático (cornering force)
-      const sideSmooth = Math.tanh(vWheelSide * 4.5);
-      const lateralMu = onAsphalt ? 0.72 : 0.42;
+      // Rigidez lateral del neumático (cornering force): mantiene el avión firme sobre la línea central
+      const sideSmooth = Math.tanh(vWheelSide * 9.5);
+      const lateralMu = onAsphalt ? 0.92 : 0.48;
       const forceWheelSide = -normalForceN * lateralMu * sideSmooth;
 
       // Pasar fuerzas de neumático a ejes cuerpo y luego a ejes mundo
