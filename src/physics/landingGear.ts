@@ -100,6 +100,9 @@ export function computeLandingGearForces(
   parkingBrake: boolean,
   wasOnGroundPrevStep: boolean
 ): GearStepResult {
+  const forwardSpeedMps = Math.hypot(velocityWorld.x, velocityWorld.z);
+  const noseSteerSpeedScale = Math.max(0.22, 1.0 - Math.min(1.0, forwardSpeedMps / 28.0) * 0.78);
+
   const wheels: Array<{
     key: 'nose' | 'mainLeft' | 'mainRight';
     spec: WheelSpec;
@@ -110,7 +113,8 @@ export function computeLandingGearForces(
       key: 'nose',
       spec: gearConfig.nose,
       brake: parkingBrake ? 0.5 : 0,
-      steerAngleRad: -rudderInput * (gearConfig.nose.maxSteerAngleRad ?? 0.5)
+      steerAngleRad:
+        -rudderInput * (gearConfig.nose.maxSteerAngleRad ?? 0.34) * noseSteerSpeedScale
     },
     {
       key: 'mainLeft',

@@ -543,6 +543,19 @@ export function stepFlightSimulation(
   }
 
   const attitude = extractAttitudeFromQuat(nextRb.orientation);
+
+  // Estabilidad diedral (efecto del ala alta del Cessna 172):
+  // Cuando el piloto no está aplicando alerón fuerte, la gravedad bajo el ala alta tiende
+  // a nivelar suavemente las alas (pendulum / dihedral effect).
+  const rollRadCurrent = (attitude.rollDeg * Math.PI) / 180;
+  const dihedralRestoreNm =
+    !gearRes.anyWheelOnGround && Math.abs(controls.aileron) < 0.15
+      ? -Math.sin(rollRadCurrent) * 340
+      : 0;
+  if (dt > 0 && !state.crashedReason && dihedralRestoreNm !== 0) {
+    nextRb.angularVelocityBody.x += (dihedralRestoreNm / config.mass.inertia.Ixx) * dt;
+  }
+
   const groundSpeedMps = Math.hypot(nextRb.velocity.x, nextRb.velocity.z);
 
   const telemetry: FlightTelemetry = {

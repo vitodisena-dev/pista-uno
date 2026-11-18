@@ -33,7 +33,7 @@
     "maxRpm": 2700,
     "propDiameterMeters": 1.93,
     "throttleTauSeconds": 0.45,
-    "pFactorYawCoeff": 0.014
+    "pFactorYawCoeff": 0.008
   },
   "vSpeedsKnots": {
     "Vso": 40,
@@ -55,17 +55,17 @@
     "cyBetaPerRad": -0.39,
     "cm0": 0.035,
     "cmAlphaPerRad": -0.36,
-    "cmDeltaElevatorPerRad": -2.45,
-    "cmQPerRad": -9.8,
-    "clBetaPerRad": -0.092,
-    "clDeltaAileronPerRad": 0.175,
-    "clPPerRad": -0.48,
-    "cnBetaPerRad": 0.072,
-    "cnDeltaRudderPerRad": -0.068,
-    "cnRPerRad": -0.115,
+    "cmDeltaElevatorPerRad": -2.65,
+    "cmQPerRad": -10.8,
+    "clBetaPerRad": -0.125,
+    "clDeltaAileronPerRad": 0.145,
+    "clPPerRad": -0.68,
+    "cnBetaPerRad": 0.105,
+    "cnDeltaRudderPerRad": -0.058,
+    "cnRPerRad": -0.185,
     "flaps": {
       "anglesDeg": [0, 10, 20, 30],
-      "deltaCl": [0.0, 0.28, 0.56, 0.88],
+      "deltaCl": [0.0, 0.25, 0.48, 0.72],
       "deltaCd": [0.0, 0.008, 0.022, 0.045],
       "deltaCm": [0.0, -0.015, -0.028, -0.04]
     }
@@ -75,7 +75,7 @@
       "offsetBodyMeters": { "x": 1.35, "y": -1.30, "z": 0.0 },
       "springStiffnessNPerM": 38000,
       "dampingNsPerM": 4200,
-      "maxSteerAngleRad": 0.52
+      "maxSteerAngleRad": 0.34
     },
     "mainLeft": {
       "offsetBodyMeters": { "x": -0.06, "y": -1.28, "z": -1.25 },

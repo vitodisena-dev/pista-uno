@@ -59,23 +59,26 @@ export class XboxGamepadController {
     }
 
     // 1. Stick Izquierdo: Alabeo (axes[0]) y Cabeceo (axes[1]: hacia atrás +1 = subir nariz)
+    // Aplicamos curva exponencial suave y filtro de paso bajo para que no tenga tirones bruscos
     const rawRoll = gp.axes[0] ?? 0;
     const rawPitch = gp.axes[1] ?? 0;
-    const stickAileron = applyDeadzoneAndExpo(rawRoll);
-    const stickElevator = applyDeadzoneAndExpo(rawPitch);
+    const stickAileron = applyDeadzoneAndExpo(rawRoll) * 0.78;
+    const stickElevator = applyDeadzoneAndExpo(rawPitch) * 0.75;
+    const smoothAlpha = Math.min(1, dt * 11.0);
 
-    if (Math.abs(stickAileron) > 0.001 || Math.abs(rawRoll) < 0.15) {
-      if (Math.abs(stickAileron) > 0.001) controls.aileron = stickAileron;
+    if (Math.abs(rawRoll) > 0.08) {
+      controls.aileron += (stickAileron - controls.aileron) * smoothAlpha;
     }
-    if (Math.abs(stickElevator) > 0.001) {
-      controls.elevator = stickElevator;
+    if (Math.abs(rawPitch) > 0.08) {
+      controls.elevator += (stickElevator - controls.elevator) * smoothAlpha;
     }
 
-    // 2. LB (4) / RB (5): Timón y rueda de nariz
+    // 2. LB (4) / RB (5): Timón y rueda de nariz con curva suave
     const lb = gp.buttons[4]?.value ?? 0;
     const rb = gp.buttons[5]?.value ?? 0;
     if (lb > 0.05 || rb > 0.05) {
-      controls.rudder = rb - lb;
+      const targetRudder = Math.sign(rb - lb) * Math.pow(Math.abs(rb - lb), 1.6) * 0.75;
+      controls.rudder += (targetRudder - controls.rudder) * smoothAlpha;
     }
 
     // 3. LT (6) / RT (7): Acelerador incremental que conserva su posición

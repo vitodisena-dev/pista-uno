@@ -12,9 +12,9 @@ export interface SmoothingSettings {
 }
 
 export const DEFAULT_SMOOTHING: SmoothingSettings = {
-  deadzone: 0.08,
-  expoCurve: 1.65,
-  keyboardSlewRatePerSec: 2.8
+  deadzone: 0.1,
+  expoCurve: 2.25,
+  keyboardSlewRatePerSec: 1.35
 };
 
 /**

@@ -60,22 +60,23 @@ export class KeyboardController {
 
   public update(controls: FlightControlsInput, dt: number): void {
     // 1. Cabeceo: S / ArrowDown tira del cuerno (+elevator = subir nariz), W / ArrowUp empuja (-elevator = bajar nariz)
+    // Limitamos el recorrido máximo de teclado a ±0.62 para que sea dócil y progresivo
     let pitchTarget = 0;
-    if (this.pressed.has('KeyS') || this.pressed.has('ArrowDown')) pitchTarget += 1;
-    if (this.pressed.has('KeyW') || this.pressed.has('ArrowUp')) pitchTarget -= 1;
+    if (this.pressed.has('KeyS') || this.pressed.has('ArrowDown')) pitchTarget += 0.62;
+    if (this.pressed.has('KeyW') || this.pressed.has('ArrowUp')) pitchTarget -= 0.55;
 
     // 2. Alabeo: D / ArrowRight (+aileron = derecha), A / ArrowLeft (-aileron = izquierda)
     let rollTarget = 0;
-    if (this.pressed.has('KeyD') || this.pressed.has('ArrowRight')) rollTarget += 1;
-    if (this.pressed.has('KeyA') || this.pressed.has('ArrowLeft')) rollTarget -= 1;
+    if (this.pressed.has('KeyD') || this.pressed.has('ArrowRight')) rollTarget += 0.58;
+    if (this.pressed.has('KeyA') || this.pressed.has('ArrowLeft')) rollTarget -= 0.58;
 
     // 3. Timón: E (+rudder = derecha), Q (-rudder = izquierda)
     let yawTarget = 0;
-    if (this.pressed.has('KeyE')) yawTarget += 1;
-    if (this.pressed.has('KeyQ')) yawTarget -= 1;
+    if (this.pressed.has('KeyE')) yawTarget += 0.55;
+    if (this.pressed.has('KeyQ')) yawTarget -= 0.55;
 
     const slew = DEFAULT_SMOOTHING.keyboardSlewRatePerSec * dt;
-    const returnSlew = slew * 1.45;
+    const returnSlew = slew * 1.85;
 
     controls.elevator = moveTowards(
       controls.elevator,
