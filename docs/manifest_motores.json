@@ -1,0 +1,66 @@
+[
+  {
+    "filename": "JSBSim_Reference_Manual_2011.pdf",
+    "source_url": "https://jsbsim.sourceforge.net/JSBSimReferenceManual.pdf",
+    "retrieved_date": "2026-11-18",
+    "status": "failed",
+    "error": "HTTP Error 403: Forbidden",
+    "notes": "Enlace abierto y leído mediante navegador web: 158 páginas, edición 2011. Descarga directa HTTP 403; no existe copia PDF local en esta entrega."
+  },
+  {
+    "filename": "JSBSim_COPYING_LGPL_2_1.txt",
+    "source_url": "https://raw.githubusercontent.com/JSBSim-Team/jsbsim/master/COPYING",
+    "retrieved_date": "2026-11-18",
+    "content_type": "text/plain; charset=utf-8",
+    "status": "downloaded",
+    "bytes": 27032,
+    "sha256": "1e7e6bae5a5bde32f1ae5a7c37a082d1ab03cf89354f7f936ac40be9e39a6531"
+  },
+  {
+    "filename": "JSBSim_Unreal_LICENSE_MIT.txt",
+    "source_url": "https://raw.githubusercontent.com/JSBSim-Team/jsbsim/master/UnrealEngine/LICENSE.txt",
+    "retrieved_date": "2026-11-18",
+    "content_type": "text/plain; charset=utf-8",
+    "status": "downloaded",
+    "bytes": 1035,
+    "sha256": "1847e0e0698142ed4347c1441a9fa81c8fbddd44b1d8bbcd5e3647f991759d7f"
+  },
+  {
+    "filename": "JSBSim_Unreal_README.md",
+    "source_url": "https://raw.githubusercontent.com/JSBSim-Team/jsbsim/master/UnrealEngine/README.md",
+    "retrieved_date": "2026-11-18",
+    "content_type": "text/plain; charset=utf-8",
+    "status": "downloaded",
+    "bytes": 11336,
+    "sha256": "b6fcd9fc114f41cd610cea557b437a6a6f671981a7be6bfbfe0de2f02cc86f06"
+  },
+  {
+    "filename": "JSBSim_README.md",
+    "source_url": "https://raw.githubusercontent.com/JSBSim-Team/jsbsim/master/README.md",
+    "retrieved_date": "2026-11-18",
+    "content_type": "text/plain; charset=utf-8",
+    "status": "downloaded",
+    "bytes": 22184,
+    "sha256": "c1c981163f815c089d6ad17fe644b0e5d1a9fc1af995241708c9c179cbf49fc1"
+  },
+  {
+    "filename": "JSBSim_f16.xml",
+    "source_url": "https://raw.githubusercontent.com/JSBSim-Team/jsbsim/master/aircraft/f16/f16.xml",
+    "retrieved_date": "2026-11-18",
+    "content_type": "text/plain; charset=utf-8",
+    "status": "downloaded",
+    "bytes": 61027,
+    "sha256": "78edd90534338204913c35ed50d7c222eecac1b83c454c73ad70bf6d4907ea2f",
+    "notes": "Referencia parcial F-16A Block-32; requiere archivos dependientes. Encabezado GPL sin versión numérica. Cita NASA TP-1538. Sin aval del fabricante."
+  },
+  {
+    "filename": "JSBSim_737.xml",
+    "source_url": "https://raw.githubusercontent.com/JSBSim-Team/jsbsim/master/aircraft/737/737.xml",
+    "retrieved_date": "2026-11-18",
+    "content_type": "text/plain; charset=utf-8",
+    "status": "downloaded",
+    "bytes": 34129,
+    "sha256": "1ac0bde51e3665306ebdc70f7920748aaf1b58a0f5443b63eed400dbf92be338",
+    "notes": "Referencia parcial; requiere archivos dependientes. Encabezado GPL sin versión numérica y aviso de no venta: aclarar antes de distribución comercial. No avalado por Boeing."
+  }
+]

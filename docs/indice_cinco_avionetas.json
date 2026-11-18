@@ -1,0 +1,37 @@
+{
+  "fecha_consulta": "2026-11-18",
+  "aeronaves": [
+    {
+      "familia": "Cessna 152",
+      "variante": "por definir",
+      "fuente_oficial": "https://pubs.txtav.com/",
+      "evidencia_acceso": "https://download.txtav.com/webCDN/1VIEW_UsersGuide.pdf",
+      "estado": "portal_suscripcion_no_POH_descargado"
+    },
+    {
+      "familia": "Cessna 172",
+      "variante": "por definir",
+      "fuente_oficial": "https://pubs.txtav.com/",
+      "evidencia_acceso": "https://download.txtav.com/webCDN/1VIEW_UsersGuide.pdf",
+      "estado": "portal_suscripcion_no_POH_descargado"
+    },
+    {
+      "familia": "Piper PA-28",
+      "variante": "por definir_Archer_Warrior_Arrow_distintos",
+      "fuente_oficial": "https://www.piper.com/technical-publications/",
+      "estado": "pagina_verificada_compra_distribuidor_o_Veryon_no_POH_descargado"
+    },
+    {
+      "familia": "Diamond DA40",
+      "variante": "180_y_NG_no_intercambiables",
+      "fuente_oficial": "https://www.diamondaircraft.com/en/service-and-support/diamond-flight-training/checklists/",
+      "estado": "checklist_oficial_publico_AFM_host_bloqueado_certificado"
+    },
+    {
+      "familia": "Cirrus SR22",
+      "variante": "por_definir_Avidyne_Perspective_PerspectivePlus_TouchPlus",
+      "fuente_oficial": "https://store.cirrusaircraft.com/pro-shop-retail-products/tech-pubs/sr22-all/5637148448.c?domain=store.cirrusaircraft.com",
+      "estado": "catalogo_oficial_POH_fisico_no_PDF_publico_confirmado"
+    }
+  ]
+}

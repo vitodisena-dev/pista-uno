@@ -1,0 +1,58 @@
+[
+  {
+    "filename": "Diamond_DA40_180_AFM_Rev10.pdf",
+    "url_original": "https://support.diamond-air.at/fileadmin/uploads/files/after_sales_support/DA40-180/Airplane_Flight_Manual/Basic_Manual/60101e-r10-complete.pdf",
+    "fecha_consulta": "2026-11-18",
+    "estado": "no_descargado",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)>",
+    "error_http": "<urlopen error timed out>"
+  },
+  {
+    "filename": "FAA_PHAK_25C.pdf",
+    "url_original": "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/faa-h-8083-25c.pdf",
+    "fecha_consulta": "2026-11-18",
+    "estado": "descargado",
+    "bytes": 77598564,
+    "sha256": "247929cace0ab56b376e683eba540cc4c8f39f199ab35414e8b604e24f395cb7"
+  },
+  {
+    "filename": "FAA_Weight_Balance_8083_1B.pdf",
+    "url_original": "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/FAA-H-8083-1.pdf",
+    "fecha_consulta": "2026-11-18",
+    "estado": "descargado",
+    "bytes": 14879984,
+    "sha256": "84015042cdf8f4ab46cfec8a55fd47e9c96cbe95b423f0f6cab14e4425079a10"
+  },
+  {
+    "filename": "FAA_Aviation_Weather_28B.pdf",
+    "url_original": "https://www.faa.gov/sites/faa.gov/files/FAA-H-8083-28B.pdf",
+    "fecha_consulta": "2026-11-18",
+    "estado": "descargado",
+    "bytes": 18515580,
+    "sha256": "2a87e4a5613e2a8e060aaf83a95dfc55b61b0e576f5b783df9fdcebe62da62c3"
+  },
+  {
+    "filename": "Textron_1View_Guia_acceso.pdf",
+    "url_original": "https://download.txtav.com/webCDN/1VIEW_UsersGuide.pdf",
+    "fecha_consulta": "2026-11-18",
+    "estado": "descargado",
+    "bytes": 20287133,
+    "sha256": "6f9fa02e1380b68ae863c3d91141c9b6e0f0c5620e1eab5552d831f3dc34c62d"
+  },
+  {
+    "filename": "Diamond_DA40_180_Checklist_2015.pdf",
+    "url_original": "https://www.diamondaircraft.com/fileadmin/diamondaircraft/service-and-support/Pilot_Training_Austria/Checklists/checklists_DA40_180/DA40_180_Conventional_Cockpit/DA40_180_STAR_Checklist_Edit_17_A4.pdf",
+    "fecha_consulta": "2026-11-18",
+    "estado": "descargado",
+    "bytes": 201521,
+    "sha256": "7cf64efc52a6146d1cf20565625b1ff503dc3664df3bb7f7b7a8a5ee8017cd04"
+  },
+  {
+    "filename": "FAA_AFH_3_Maniobras_basicas.pdf",
+    "url_original": "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/airplane_handbook/04_afh_ch3.pdf",
+    "fecha_consulta": "2026-11-18",
+    "estado": "descargado",
+    "bytes": 42124251,
+    "sha256": "8dd948a4f8c99a304b9cfbc7746726bfda2109660d53bcb904b0b9383bd57e71"
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "fecha_consulta": "2026-11-18",
+  "archivos": [
+    {
+      "filename": "MIT_16_333_01_rendimiento_equilibrio.pdf",
+      "url_original": "https://ocw.mit.edu/courses/16-333-aircraft-stability-and-control-fall-2004/9befd7ea465e31f9ff763c5587815264_lecture_1.pdf",
+      "url_final": "https://ocw.mit.edu/courses/16-333-aircraft-stability-and-control-fall-2004/9befd7ea465e31f9ff763c5587815264_lecture_1.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 162106,
+      "sha256": "619f6149ecb865ef788aee44d9643696d3c8141f9ffd5000a8c6520e0ad94904"
+    },
+    {
+      "filename": "MIT_16_333_03_coordenadas_cuaterniones.pdf",
+      "url_original": "https://ocw.mit.edu/courses/16-333-aircraft-stability-and-control-fall-2004/9f042ee5f0597fd8913f6ac53bbb917b_lecture_3.pdf",
+      "url_final": "https://ocw.mit.edu/courses/16-333-aircraft-stability-and-control-fall-2004/9f042ee5f0597fd8913f6ac53bbb917b_lecture_3.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 377704,
+      "sha256": "932c504f608412eb08b69996853819ce3f94bf20b0f84ccb68ac30b3fa944645"
+    },
+    {
+      "filename": "MIT_16_333_04_dinamica_fuerzas_derivadas.pdf",
+      "url_original": "https://ocw.mit.edu/courses/16-333-aircraft-stability-and-control-fall-2004/c6eee980ed173de9dde7f4ee453354ee_lecture_4.pdf",
+      "url_final": "https://ocw.mit.edu/courses/16-333-aircraft-stability-and-control-fall-2004/c6eee980ed173de9dde7f4ee453354ee_lecture_4.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 374475,
+      "sha256": "2b0429fdb0f286db99da27ef97839ffa40f86f2f2832d1f5733d7558cd5517d7"
+    },
+    {
+      "filename": "MIT_16_333_14_viento_rafagas.pdf",
+      "url_original": "https://ocw.mit.edu/courses/16-333-aircraft-stability-and-control-fall-2004/fecac90444be983eb19e0451e739692c_lecture_14.pdf",
+      "url_final": "https://ocw.mit.edu/courses/16-333-aircraft-stability-and-control-fall-2004/fecac90444be983eb19e0451e739692c_lecture_14.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 223103,
+      "sha256": "bb602fda76b1ab44b692c6c716a3bc056c04743ab37a1e39fb21eaa4d659b041"
+    },
+    {
+      "filename": "UIUC_Low_Speed_Airfoil_Data_Vol2.pdf",
+      "url_original": "https://m-selig.ae.illinois.edu/uiuc_lsat/Low-Speed-Airfoil-Data-V2.pdf",
+      "url_final": "https://m-selig.ae.illinois.edu/uiuc_lsat/Low-Speed-Airfoil-Data-V2.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 6072918,
+      "sha256": "028723cb945b46c9a84c99c8a14ee20e1215605e7a072b2e2f16b43d21c83c64"
+    },
+    {
+      "filename": "UIUC_Propeller_Database.zip",
+      "url_original": "https://m-selig.ae.illinois.edu/props/download/UIUC-propDB.zip",
+      "url_final": "https://m-selig.ae.illinois.edu/props/download/UIUC-propDB.zip",
+      "estado": "descargado_ZIP_verificado",
+      "bytes": 90906721,
+      "sha256": "089b66db10391b9a3ad53aac1b95fa63d24bb7130f0dc1e6a4e7d971c5645995"
+    }
+  ]
+}

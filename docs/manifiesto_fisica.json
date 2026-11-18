@@ -1,0 +1,93 @@
+{
+  "fecha_consulta": "2026-11-18",
+  "archivos": [
+    {
+      "filename": "NASA_TP_1538_F16_1979.pdf",
+      "url_original": "https://ntrs.nasa.gov/api/citations/19800005879/downloads/19800005879.pdf",
+      "url_final": "https://ntrs.nasa.gov/api/citations/19800005879/downloads/19800005879.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 10034073,
+      "sha256": "aae0ece64474291368c0b4c816d3ab327c6100329e6eb030c2f4545d0913feb3"
+    },
+    {
+      "filename": "NASA_TM_107601_FA18_base_1992.pdf",
+      "url_original": "https://ntrs.nasa.gov/api/citations/19920024293/downloads/19920024293.pdf",
+      "url_final": "https://ntrs.nasa.gov/api/citations/19920024293/downloads/19920024293.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 7182279,
+      "sha256": "34ed8edd9452aed3afbd7677c3847b888ec4b234224e0dd016c114564f5bb9f3"
+    },
+    {
+      "filename": "NASA_TM_110216_FA18_HARV_1996.pdf",
+      "url_original": "https://ntrs.nasa.gov/api/citations/19960027892/downloads/19960027892.pdf",
+      "url_final": "https://ntrs.nasa.gov/api/citations/19960027892/downloads/19960027892.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 8126898,
+      "sha256": "55ebc29f32152970b4117865299d16777c1b0a5cd760e75bde6979944e738f6c"
+    },
+    {
+      "filename": "NASA_TM_2011_217169_TCM_GTM.pdf",
+      "url_original": "https://ntrs.nasa.gov/api/citations/20110014509/downloads/20110014509.pdf",
+      "url_final": "https://ntrs.nasa.gov/api/citations/20110014509/downloads/20110014509.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 1505322,
+      "sha256": "22570bc60fd366a86ae2e3eb44dff7008a2764e5e3c31545c66ba758626800b5"
+    },
+    {
+      "filename": "NASA_CR_2144_handling_qualities_B747_1972.pdf",
+      "url_original": "https://ntrs.nasa.gov/api/citations/19730003312/downloads/19730003312.pdf",
+      "url_final": "https://ntrs.nasa.gov/api/citations/19730003312/downloads/19730003312.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 7101468,
+      "sha256": "f2976b2d9a3f62471de276c019f314af58b83c92ebd61f915779bea4d784349a"
+    },
+    {
+      "filename": "NASA_NESC_6DOF_Vol1.pdf",
+      "url_original": "https://nescacademy.nasa.gov/src/flightsim/Reports/NASA-TM-2015-218675-EOM_checkcase_summary.pdf",
+      "url_final": "https://nescacademy.nasa.gov/src/flightsim/Reports/NASA-TM-2015-218675-EOM_checkcase_summary.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 1029561,
+      "sha256": "541db40684ee5663064ccf4b5e4ede7ffd536d38adb5493ce3af84da4f961d5f"
+    },
+    {
+      "filename": "NASA_NESC_6DOF_Vol2.pdf",
+      "url_original": "https://nescacademy.nasa.gov/src/flightsim/Reports/NASA-TM-2015-218675-EOM_checkcase_appendices.pdf",
+      "url_final": "https://nescacademy.nasa.gov/src/flightsim/Reports/NASA-TM-2015-218675-EOM_checkcase_appendices.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 16603034,
+      "sha256": "f5d702972352331d8f9a7e3867f0cfdec2f91305da26a13c47d4c9a80fb0eb77"
+    },
+    {
+      "filename": "US_Standard_Atmosphere_1976.pdf",
+      "url_original": "https://ntrs.nasa.gov/api/citations/19770009539/downloads/19770009539.pdf",
+      "url_final": "https://ntrs.nasa.gov/api/citations/19770009539/downloads/19770009539.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 18101069,
+      "sha256": "23eb6b68346d4abc6071fc598872d51c40cf8c613d1a5d1006c6261bcd09dcea"
+    },
+    {
+      "filename": "NASA_CR_96008_stability_control_Teper_1969.pdf",
+      "url_original": "https://ntrs.nasa.gov/api/citations/19690022405/downloads/19690022405.pdf",
+      "url_final": "https://ntrs.nasa.gov/api/citations/19690022405/downloads/19690022405.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 3741095,
+      "sha256": "125f2096677d1dd0d69558b817252d94c7836e955c756d527967f9713f4b9625"
+    },
+    {
+      "filename": "NASA_CR_1998_206937_Dryden_HARV.pdf",
+      "url_original": "https://ntrs.nasa.gov/api/citations/19980028448/downloads/19980028448.pdf",
+      "url_final": "https://ntrs.nasa.gov/api/citations/19980028448/downloads/19980028448.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 4632679,
+      "sha256": "4f63d46d3eac9568239941e943b98a59e1444d05b622760eaf8f07a0c1b82686"
+    },
+    {
+      "filename": "NASA_TM_1999_209531_tren_suelo_HSCT.pdf",
+      "url_original": "https://ntrs.nasa.gov/api/citations/20000011601/downloads/20000011601.pdf",
+      "url_final": "https://ntrs.nasa.gov/api/citations/20000011601/downloads/20000011601.pdf",
+      "estado": "descargado_PDF_verificado",
+      "bytes": 1631016,
+      "sha256": "c887c086455a269713445a35b8be45e8758648ba679b1558b0acfcd2c71c7523"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+BIBLIOTECA PARA SIMULADOR DE AVIONES
+Consulta: 18 de noviembre de 2026
+
+Biblioteca principal:
+https://drive.google.com/drive/folders/1vqRnNGqqRyYjqdarXL9XAXQQBKQvTOCK
+
+Manuales y acceso por aeronave:
+https://drive.google.com/drive/folders/1Y8qTUjY4e7JKqWHjp1kZwMmu6-iqGHad
+Física y aerodinámica:
+https://drive.google.com/drive/folders/1HV7Rnxoa-RSU8_LXvL9ZcXYP_vetwtV7
+Motor de simulación:
+https://drive.google.com/drive/folders/15ytYaR9SWrvl_8eoWH8qBSyUaHSN30JB
+Notas y fuentes:
+https://drive.google.com/drive/folders/193RtKYrK8egQ0JaDRtjE0GfAiipcTw4y
+
+PROPUESTA DE CINCO AVIONETAS
+Cessna 152, Cessna 172, Piper PA-28, Diamond DA40 y Cirrus SR22.
+Variantes, motores y aviónica todavía por decidir. Conviene empezar por una sola.
+
+QUÉ LEER PRIMERO
+Informe “Documentación para simulador de aviones”. Después, FAA PHAK,
+notas MIT de estabilidad/control, atmósfera estándar y casos NASA NESC.
+Evaluar JSBSim como núcleo físico; el motor gráfico sigue sin elegir.
+
+QUÉ CONTIENE
+22 PDF originales (6 de manuales/acceso y 16 de física), 1 ZIP UIUC,
+6 archivos técnicos del motor e índices/manifiestos con las fuentes.
+Los estudios de jets se conservan como referencia y para una fase futura.
+
+PENDIENTES IMPORTANTES
+No se descargó un AFM/POH completo de ninguna de las cinco avionetas.
+Cessna: ruta de publicaciones Textron; Piper: PIM/ePOH y compra según producto;
+Cirrus: catálogo por configuración; Diamond: AFM identificado con descarga fallida.
+El checklist DA40 y la guía 1View no sustituyen al manual del avión.
+Faltan datos específicos de inercia, derivadas, motor-hélice y postpérdida.
+Los XML de ejemplo no son aviones completos listos para distribuir.
+Consultar los avisos particulares de cada documento, código y modelo.

@@ -1,0 +1,54 @@
+{
+  "icao": "MMMD",
+  "name": "Aeropuerto Internacional de Mérida Manuel Crescencio Rejón",
+  "city": "Mérida, Yucatán, México",
+  "referenceCoordinates": {
+    "latitudeDeg": 20.9370,
+    "longitudeDeg": -89.6577,
+    "elevationMetersMSL": 12.0,
+    "elevationFeetMSL": 38.0,
+    "magneticVariationDeg": 0.5
+  },
+  "runways": [
+    {
+      "id": "10/28",
+      "lengthMeters": 3200,
+      "widthMeters": 45,
+      "surface": "asphalt",
+      "centerPosition": { "x": 0, "y": 0, "z": 0 },
+      "headingTrueDeg": 108.0,
+      "ends": {
+        "10": {
+          "designator": "10",
+          "headingMagneticDeg": 108,
+          "thresholdOffsetMeters": -1550,
+          "glideSlopeDeg": 3.0,
+          "papiOffsetFromThresholdMeters": 300,
+          "papiLateralOffsetMeters": -32
+        },
+        "28": {
+          "designator": "28",
+          "headingMagneticDeg": 288,
+          "thresholdOffsetMeters": 1550,
+          "glideSlopeDeg": 3.0,
+          "papiOffsetFromThresholdMeters": 300,
+          "papiLateralOffsetMeters": -32
+        }
+      }
+    },
+    {
+      "id": "18/36",
+      "lengthMeters": 2300,
+      "widthMeters": 45,
+      "surface": "asphalt",
+      "centerPosition": { "x": 250, "y": 0, "z": 350 },
+      "headingTrueDeg": 180.0
+    }
+  ],
+  "windsock": {
+    "position": { "x": -1250, "y": 0, "z": -55 }
+  },
+  "towerCamera": {
+    "position": { "x": -400, "y": 38, "z": -180 }
+  }
+}

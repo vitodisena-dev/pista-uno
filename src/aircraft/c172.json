@@ -1,0 +1,94 @@
+{
+  "id": "c172",
+  "name": "Cessna 172S Skyhawk SP (180 HP)",
+  "_sources": {
+    "geometryAndMass": "FAA TCDS 3A12 / POH C172S (180 hp) — publicado",
+    "vSpeeds": "POH Cessna 172S & FAA AFH Cap. 3 — publicado",
+    "aerodynamics": "MIT 16.333 (Clases 1, 3, 4) & NASA CR-96008 (Teper GA) — calculado/calibrado",
+    "propeller": "Adimensional J = V/(n*D) calibrado a McCauley 1A170E/JHA7660 (1.93 m) — estimado",
+    "landingGear": "Triciclo resorte-amortiguador calibrado para 1110 kg (NASA TM-1999-209531) — estimado"
+  },
+  "mass": {
+    "emptyMassKg": 755,
+    "defaultMassKg": 1020,
+    "maxTakeoffMassKg": 1111,
+    "inertia": {
+      "Ixx": 1285,
+      "Iyy": 1825,
+      "Izz": 2667,
+      "_note": "estimado — momentos de inercia (kg·m²) convertidos de slug·ft² típicos C172"
+    }
+  },
+  "geometry": {
+    "wingSpanMeters": 11.0,
+    "wingAreaSqMeters": 16.17,
+    "meanAerodynamicChordMeters": 1.49,
+    "aspectRatio": 7.48,
+    "oswaldEfficiency": 0.78
+  },
+  "engine": {
+    "maxPowerHp": 180,
+    "maxPowerWatts": 134226,
+    "idleRpm": 650,
+    "maxRpm": 2700,
+    "propDiameterMeters": 1.93,
+    "throttleTauSeconds": 0.45,
+    "pFactorYawCoeff": 0.014
+  },
+  "vSpeedsKnots": {
+    "Vso": 40,
+    "Vs1": 48,
+    "Vr": 55,
+    "Vx": 62,
+    "Vy": 74,
+    "Vfe": 85,
+    "Vapp": 63,
+    "Vno": 129,
+    "Vne": 163
+  },
+  "aerodynamics": {
+    "alphaZeroLiftRad": -0.038,
+    "clAlphaPerRad": 5.15,
+    "alphaStallRad": 0.262,
+    "clMaxClean": 1.42,
+    "cd0Clean": 0.028,
+    "cyBetaPerRad": -0.39,
+    "cm0": 0.04,
+    "cmAlphaPerRad": -0.68,
+    "cmDeltaElevatorPerRad": -1.28,
+    "cmQPerRad": -12.4,
+    "clBetaPerRad": -0.092,
+    "clDeltaAileronPerRad": 0.175,
+    "clPPerRad": -0.48,
+    "cnBetaPerRad": 0.072,
+    "cnDeltaRudderPerRad": -0.068,
+    "cnRPerRad": -0.115,
+    "flaps": {
+      "anglesDeg": [0, 10, 20, 30],
+      "deltaCl": [0.0, 0.20, 0.36, 0.48],
+      "deltaCd": [0.0, 0.009, 0.024, 0.048],
+      "deltaCm": [0.0, -0.025, -0.045, -0.065]
+    }
+  },
+  "landingGear": {
+    "nose": {
+      "offsetBodyMeters": { "x": 1.35, "y": -1.32, "z": 0.0 },
+      "springStiffnessNPerM": 38000,
+      "dampingNsPerM": 4200,
+      "maxSteerAngleRad": 0.52
+    },
+    "mainLeft": {
+      "offsetBodyMeters": { "x": -0.35, "y": -1.28, "z": -1.25 },
+      "springStiffnessNPerM": 52000,
+      "dampingNsPerM": 5400
+    },
+    "mainRight": {
+      "offsetBodyMeters": { "x": -0.35, "y": -1.28, "z": 1.25 },
+      "springStiffnessNPerM": 52000,
+      "dampingNsPerM": 5400
+    },
+    "rollingFrictionAsphalt": 0.022,
+    "rollingFrictionGrass": 0.095,
+    "maxBrakeFriction": 0.62
+  }
+}
