@@ -37,7 +37,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 16px;
+        padding: 14px;
       }
       .top-bar {
         display: flex;
@@ -45,13 +45,19 @@
         align-items: flex-start;
         gap: 12px;
       }
+      .bottom-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 12px;
+      }
       .badge-panel {
-        background: rgba(15, 23, 42, 0.78);
+        background: rgba(15, 23, 42, 0.82);
         border: 1px solid rgba(148, 163, 184, 0.28);
         backdrop-filter: blur(8px);
         border-radius: 10px;
         padding: 10px 14px;
-        font-size: 13px;
+        font-size: 12.5px;
         line-height: 1.45;
       }
       .badge-title {
@@ -65,22 +71,123 @@
         gap: 14px;
         font-variant-numeric: tabular-nums;
       }
+      .flight-strip {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        font-variant-numeric: tabular-nums;
+      }
+      .flight-metric {
+        display: flex;
+        flex-direction: column;
+      }
+      .flight-metric span {
+        font-size: 11px;
+        color: #94a3b8;
+        text-transform: uppercase;
+      }
+      .flight-metric strong {
+        font-size: 18px;
+        color: #f8fafc;
+      }
+      #gamepad-toast {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(22, 163, 74, 0.92);
+        color: white;
+        padding: 6px 16px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      #stall-banner {
+        display: none;
+        position: absolute;
+        top: 115px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(220, 38, 38, 0.92);
+        border: 1px solid #fca5a5;
+        color: white;
+        padding: 6px 18px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+      }
+      .btn-interactive {
+        pointer-events: auto;
+        cursor: pointer;
+        background: #0284c7;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 5px 10px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .btn-interactive:hover {
+        background: #0369a1;
+      }
     </style>
   </head>
   <body>
     <div id="app">
       <canvas id="sim-canvas"></canvas>
+      <div id="gamepad-toast">🎮 Mando conectado</div>
+      <div id="stall-banner">⚠️ STALL / PÉRDIDA — BAJA LA NARIZ Y SUBE POTENCIA</div>
       <div id="hud-overlay">
         <div class="top-bar">
           <div class="badge-panel">
-            <div class="badge-title">✈️ PISTA UNO — Fase 1 (Escena Base & Loop 120 Hz)</div>
-            <div>Aeropuerto: <strong>MMMD (Mérida, Yucatán)</strong> · Pista <strong>10/28</strong> (3,200 m × 45 m · 38 ft MSL)</div>
-            <div>Aeronave: <strong>Cessna 172S Skyhawk (180 HP)</strong> · Posicionado en Cabecera 10</div>
+            <div class="badge-title">✈️ PISTA UNO — Fase 2 (Modelo de Vuelo 6-DOF + Controles + Debug)</div>
+            <div>Aeropuerto: <strong>MMMD (Mérida)</strong> · Pista <strong>10/28</strong> · Avión: <strong>Cessna 172S Skyhawk (180 HP)</strong></div>
+            <div style="color:#cbd5e1;margin-top:3px;">
+              ⌨️ <strong>Shift/Ctrl</strong>: Acelerador · <strong>S/W</strong> o <strong>↓/↑</strong>: Subir/Bajar nariz · <strong>A/D</strong>: Alabeo · <strong>Q/E</strong>: Timón · <strong>F/R</strong>: Flaps · <strong>P</strong>: Freno Estac. · <strong>C</strong>: Cámara · <strong>F3</strong>: Debug
+            </div>
           </div>
-          <div class="badge-panel telemetry-row">
-            <div>FPS: <strong id="fps-val">60</strong></div>
-            <div>Física: <strong id="hz-val">120 Hz</strong></div>
-            <div>Pasos: <strong id="step-val">0</strong></div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+            <div class="badge-panel telemetry-row">
+              <div>FPS: <strong id="fps-val">60</strong></div>
+              <div>Cámara: <strong id="cam-val">Persecución</strong></div>
+              <button id="reset-btn" class="btn-interactive">↺ Reiniciar en Cabecera 10 (Backspace)</button>
+            </div>
+            <div id="debug-container" class="badge-panel"></div>
+          </div>
+        </div>
+
+        <div class="bottom-bar">
+          <div class="badge-panel flight-strip">
+            <div class="flight-metric">
+              <span>Velocidad (IAS)</span>
+              <strong id="hud-ias">0 kt</strong>
+            </div>
+            <div class="flight-metric">
+              <span>Altitud (MSL / AGL)</span>
+              <strong id="hud-alt">38 / 0 ft</strong>
+            </div>
+            <div class="flight-metric">
+              <span>Variómetro (VSI)</span>
+              <strong id="hud-vsi">0 ft/min</strong>
+            </div>
+            <div class="flight-metric">
+              <span>Cabeceo / Alabeo</span>
+              <strong id="hud-att">0° / 0°</strong>
+            </div>
+            <div class="flight-metric">
+              <span>Rumbo</span>
+              <strong id="hud-hdg">108°</strong>
+            </div>
+            <div class="flight-metric">
+              <span>Motor / Acelerador</span>
+              <strong id="hud-rpm">650 RPM (0%)</strong>
+            </div>
+            <div class="flight-metric">
+              <span>Flaps / Freno</span>
+              <strong id="hud-cfg">0° · LIBRE</strong>
+            </div>
           </div>
         </div>
       </div>

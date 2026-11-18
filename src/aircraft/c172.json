@@ -47,16 +47,16 @@
     "Vne": 163
   },
   "aerodynamics": {
-    "alphaZeroLiftRad": -0.038,
-    "clAlphaPerRad": 5.15,
-    "alphaStallRad": 0.262,
-    "clMaxClean": 1.42,
-    "cd0Clean": 0.028,
+    "alphaZeroLiftRad": -0.068,
+    "clAlphaPerRad": 5.95,
+    "alphaStallRad": 0.305,
+    "clMaxClean": 1.66,
+    "cd0Clean": 0.025,
     "cyBetaPerRad": -0.39,
-    "cm0": 0.04,
-    "cmAlphaPerRad": -0.68,
-    "cmDeltaElevatorPerRad": -1.28,
-    "cmQPerRad": -12.4,
+    "cm0": 0.035,
+    "cmAlphaPerRad": -0.36,
+    "cmDeltaElevatorPerRad": -2.45,
+    "cmQPerRad": -9.8,
     "clBetaPerRad": -0.092,
     "clDeltaAileronPerRad": 0.175,
     "clPPerRad": -0.48,
@@ -65,29 +65,29 @@
     "cnRPerRad": -0.115,
     "flaps": {
       "anglesDeg": [0, 10, 20, 30],
-      "deltaCl": [0.0, 0.20, 0.36, 0.48],
-      "deltaCd": [0.0, 0.009, 0.024, 0.048],
-      "deltaCm": [0.0, -0.025, -0.045, -0.065]
+      "deltaCl": [0.0, 0.28, 0.56, 0.88],
+      "deltaCd": [0.0, 0.008, 0.022, 0.045],
+      "deltaCm": [0.0, -0.015, -0.028, -0.04]
     }
   },
   "landingGear": {
     "nose": {
-      "offsetBodyMeters": { "x": 1.35, "y": -1.32, "z": 0.0 },
+      "offsetBodyMeters": { "x": 1.35, "y": -1.30, "z": 0.0 },
       "springStiffnessNPerM": 38000,
       "dampingNsPerM": 4200,
       "maxSteerAngleRad": 0.52
     },
     "mainLeft": {
-      "offsetBodyMeters": { "x": -0.35, "y": -1.28, "z": -1.25 },
+      "offsetBodyMeters": { "x": -0.06, "y": -1.28, "z": -1.25 },
       "springStiffnessNPerM": 52000,
       "dampingNsPerM": 5400
     },
     "mainRight": {
-      "offsetBodyMeters": { "x": -0.35, "y": -1.28, "z": 1.25 },
+      "offsetBodyMeters": { "x": -0.06, "y": -1.28, "z": 1.25 },
       "springStiffnessNPerM": 52000,
       "dampingNsPerM": 5400
     },
-    "rollingFrictionAsphalt": 0.022,
+    "rollingFrictionAsphalt": 0.020,
     "rollingFrictionGrass": 0.095,
     "maxBrakeFriction": 0.62
   }
