@@ -14,7 +14,7 @@ import {
 } from './physics/flightModel';
 import { FIXED_DT, lerpVec3 } from './physics/integrator';
 import { createRunway } from './world/runway';
-import { setupSkyAndLighting } from './world/sky';
+import { TimeOfDayPreset, setupSkyAndLighting } from './world/sky';
 import { createTerrain } from './world/terrain';
 
 const c172Config = c172ConfigJson as unknown as AircraftConfig;
@@ -24,6 +24,7 @@ const instrumentsCanvas = document.getElementById('instruments-canvas') as HTMLC
 const fpsEl = document.getElementById('fps-val') as HTMLElement;
 const camEl = document.getElementById('cam-val') as HTMLElement;
 const camBtn = document.getElementById('cam-btn') as HTMLButtonElement;
+const todBtn = document.getElementById('tod-btn') as HTMLButtonElement;
 const debugContainer = document.getElementById('debug-container') as HTMLElement;
 const gamepadToast = document.getElementById('gamepad-toast') as HTMLElement;
 const stallBanner = document.getElementById('stall-banner') as HTMLElement;
@@ -48,7 +49,7 @@ const yokeDot = document.getElementById('yoke-dot') as HTMLElement;
 const rudderDot = document.getElementById('rudder-dot') as HTMLElement;
 const parkingBtn = document.getElementById('parking-btn') as HTMLButtonElement;
 
-// 1. Renderizador WebGL2 con Tone Mapping ACES
+// 1. Renderizador WebGL2 con Tone Mapping ACES y Mapa de Entorno PBR
 const renderer = new THREE.WebGLRenderer({
   canvas,
   antialias: true,
@@ -59,11 +60,11 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.05;
+renderer.toneMappingExposure = 1.02;
 
-// 2. Escena 3D, Cielo, Paisaje Yucateco con Ciudad de Mérida y Pista 10/28 de MMMD
+// 2. Escena 3D, Cielo Físico Rayleigh/Mie + Nubes Cúmulos 3D, Paisaje de Mérida y Pista 10/28 de MMMD
 const scene = new THREE.Scene();
-const { sunLight } = setupSkyAndLighting(scene);
+const skyCtrl = setupSkyAndLighting(scene, renderer);
 scene.add(createTerrain());
 
 const { runwayGroup, runwayHeadingYawRad, threshold10WorldPos } = createRunway();
@@ -130,6 +131,22 @@ function toggleCamera(): void {
   cameraMode = ((cameraMode + 1) % 3) as 0 | 1 | 2;
   camEl.textContent = CAMERA_NAMES[cameraMode];
 }
+
+const TOD_PRESETS: TimeOfDayPreset[] = ['day', 'golden', 'dusk'];
+const TOD_LABELS: Record<TimeOfDayPreset, string> = {
+  day: '☀️ Hora: Día',
+  golden: '🌅 Hora: Tarde Dorada',
+  dusk: '🌇 Hora: Atardecer'
+};
+let todIdx = 0;
+
+todBtn.addEventListener('click', () => {
+  todIdx = (todIdx + 1) % TOD_PRESETS.length;
+  const preset = TOD_PRESETS[todIdx];
+  skyCtrl.setTimeOfDay(preset);
+  todBtn.textContent = TOD_LABELS[preset];
+  todBtn.blur();
+});
 
 camBtn.addEventListener('click', () => {
   toggleCamera();
@@ -239,9 +256,6 @@ function updateCamera(
     camera.position.set(-1050, 26, -390);
     camera.lookAt(renderedPos);
   }
-
-  sunLight.target.position.copy(renderedPos);
-  sunLight.target.updateMatrixWorld();
 }
 
 function updateCockpitUI(state: FlightSimulationState): void {
@@ -358,6 +372,7 @@ function animate(nowMs: number): void {
   );
 
   updateC172RigVisuals(c172Rig, controls, currSimState.engine.rpm, frameDt);
+  skyCtrl.updateClouds(frameDt, c172Rig.aircraftGroup.position);
   updateCamera(c172Rig.aircraftGroup.position, c172Rig.aircraftGroup.quaternion, frameDt);
 
   updateCockpitUI(currSimState);

@@ -183,17 +183,37 @@ export function createRunway(): {
     }
   }
 
-  // Luces PAPI (4 cajas junto a la zona de toque de la pista 10, en x = -1250 m, z = -30 m)
+  // Luces de borde de pista (Runway Edge Lights blancas cada 60 m + verdes de umbral 10 + rojas final 28)
+  const edgeLightGeo = new THREE.SphereGeometry(0.28, 8, 8);
+  const edgeLightMat = new THREE.MeshBasicMaterial({ color: 0xfef9c3 });
+  for (let x = -1520; x <= 1520; x += 60) {
+    for (const side of [-1, 1]) {
+      const bulb = new THREE.Mesh(edgeLightGeo, edgeLightMat);
+      bulb.position.set(x, 0.35, side * 22.8);
+      group.add(bulb);
+    }
+  }
+  const greenThreshMat = new THREE.MeshBasicMaterial({ color: 0x22c55e });
+  const redEndMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
+  for (let z = -20; z <= 20; z += 4) {
+    const gBulb = new THREE.Mesh(edgeLightGeo, greenThreshMat);
+    gBulb.position.set(-1552, 0.32, z);
+    const rBulb = new THREE.Mesh(edgeLightGeo, redEndMat);
+    rBulb.position.set(1552, 0.32, z);
+    group.add(gBulb, rBulb);
+  }
+
+  // Luces PAPI Dinámicas (4 cajas junto a la zona de toque de la pista 10, en x = -1250 m, z = -30 m)
   const papiBoxGeo = new THREE.BoxGeometry(1.2, 0.6, 1.2);
   const papiBoxMat = new THREE.MeshStandardMaterial({ color: 0xfbbf24 });
+  const papiLights: THREE.MeshBasicMaterial[] = [];
   for (let i = 0; i < 4; i++) {
     const box = new THREE.Mesh(papiBoxGeo, papiBoxMat);
     box.position.set(-1250, 0.3, -28 - i * 4.5);
-    const lightSphere = new THREE.Mesh(
-      new THREE.SphereGeometry(0.35, 8, 8),
-      new THREE.MeshBasicMaterial({ color: i < 2 ? 0xffffff : 0xef4444 })
-    );
-    lightSphere.position.set(-1250.7, 0.45, -28 - i * 4.5);
+    const mat = new THREE.MeshBasicMaterial({ color: i < 2 ? 0xffffff : 0xef4444 });
+    papiLights.push(mat);
+    const lightSphere = new THREE.Mesh(new THREE.SphereGeometry(0.45, 10, 10), mat);
+    lightSphere.position.set(-1250.7, 0.48, -28 - i * 4.5);
     group.add(box, lightSphere);
   }
 
