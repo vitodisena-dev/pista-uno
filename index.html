@@ -37,7 +37,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 14px;
+        padding: 12px 16px;
       }
       .top-bar {
         display: flex;
@@ -45,51 +45,266 @@
         align-items: flex-start;
         gap: 12px;
       }
-      .bottom-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        gap: 12px;
-      }
       .badge-panel {
-        background: rgba(15, 23, 42, 0.82);
-        border: 1px solid rgba(148, 163, 184, 0.28);
+        background: rgba(15, 23, 42, 0.84);
+        border: 1px solid rgba(148, 163, 184, 0.3);
         backdrop-filter: blur(8px);
         border-radius: 10px;
-        padding: 10px 14px;
+        padding: 9px 13px;
         font-size: 12.5px;
         line-height: 1.45;
       }
       .badge-title {
         font-weight: 700;
-        font-size: 14px;
+        font-size: 13.5px;
         color: #38bdf8;
         margin-bottom: 2px;
       }
       .telemetry-row {
         display: flex;
         gap: 14px;
-        font-variant-numeric: tabular-nums;
-      }
-      .flight-strip {
-        display: flex;
-        gap: 16px;
         align-items: center;
         font-variant-numeric: tabular-nums;
       }
-      .flight-metric {
+
+      /* Cintas grandes de Velocidad (IAS) y Altitud (AGL / MSL) en pantalla */
+      .primary-flight-tapes {
+        position: absolute;
+        top: 50%;
+        left: 18px;
+        right: 18px;
+        transform: translateY(-65%);
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
+        pointer-events: none;
       }
-      .flight-metric span {
+      .pfd-box {
+        background: rgba(9, 13, 22, 0.78);
+        border: 1.5px solid rgba(56, 189, 248, 0.45);
+        border-radius: 12px;
+        padding: 10px 14px;
+        min-width: 148px;
+        backdrop-filter: blur(6px);
+        font-variant-numeric: tabular-nums;
+      }
+      .pfd-label {
         font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
         color: #94a3b8;
         text-transform: uppercase;
       }
-      .flight-metric strong {
-        font-size: 18px;
+      .pfd-main-value {
+        font-size: 28px;
+        font-weight: 800;
+        color: #f8fafc;
+        line-height: 1.15;
+        margin: 2px 0;
+      }
+      .pfd-sub {
+        font-size: 11.5px;
+        color: #38bdf8;
+        font-weight: 600;
+      }
+
+      /* Tablero inferior estilo cabina Cessna 172 (Six Pack + Cuadrante de Acelerador/Flaps/Trim) */
+      .cockpit-dashboard {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        gap: 12px;
+        margin: 0 auto;
+        pointer-events: auto;
+      }
+      .sixpack-panel {
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(9, 13, 22, 0.97));
+        border: 1.5px solid rgba(148, 163, 184, 0.35);
+        border-radius: 14px;
+        padding: 6px 10px 4px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+        display: flex;
+        align-items: center;
+      }
+      .pedestal-panel {
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(9, 13, 22, 0.98));
+        border: 1.5px solid rgba(148, 163, 184, 0.35);
+        border-radius: 14px;
+        padding: 10px 14px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+      .control-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+      }
+      .ctrl-title {
+        font-size: 10.5px;
+        font-weight: 700;
+        color: #94a3b8;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      /* Acelerador (Throttle Slider vertical) */
+      .throttle-track {
+        position: relative;
+        width: 34px;
+        height: 86px;
+        background: #090d16;
+        border: 1.5px solid #475569;
+        border-radius: 8px;
+        cursor: ns-resize;
+        overflow: hidden;
+      }
+      .throttle-fill {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(180deg, #38bdf8, #0284c7);
+        height: 0%;
+        transition: height 0.04s linear;
+      }
+      .throttle-knob {
+        position: absolute;
+        left: 2px;
+        right: 2px;
+        height: 12px;
+        background: #e2e8f0;
+        border: 1px solid #0f172a;
+        border-radius: 4px;
+        bottom: 0%;
+        transform: translateY(50%);
+      }
+      .ctrl-readout {
+        font-family: ui-monospace, monospace;
+        font-size: 12px;
+        font-weight: 700;
         color: #f8fafc;
       }
+      /* Botonera de Flaps (0°, 10°, 20°, 30°) */
+      .flaps-detents {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        width: 58px;
+      }
+      .flap-btn {
+        background: #1e293b;
+        color: #cbd5e1;
+        border: 1px solid #334155;
+        border-radius: 5px;
+        padding: 3px 6px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: center;
+      }
+      .flap-btn.active {
+        background: #f59e0b;
+        color: #090d16;
+        border-color: #fde047;
+      }
+      /* Rueda de Trim */
+      .trim-track {
+        position: relative;
+        width: 24px;
+        height: 86px;
+        background: #090d16;
+        border: 1.5px solid #475569;
+        border-radius: 6px;
+      }
+      .trim-center-line {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: #64748b;
+      }
+      .trim-marker {
+        position: absolute;
+        left: 2px;
+        right: 2px;
+        height: 6px;
+        background: #38bdf8;
+        border-radius: 2px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      /* Freno de estacionamiento y Yoke visual */
+      .brake-btn {
+        background: #1e293b;
+        border: 1.5px solid #475569;
+        color: #e2e8f0;
+        border-radius: 7px;
+        padding: 6px 9px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .brake-btn.engaged {
+        background: #dc2626;
+        border-color: #fca5a5;
+        color: white;
+      }
+      .yoke-box {
+        position: relative;
+        width: 68px;
+        height: 68px;
+        background: #090d16;
+        border: 1.5px solid #334155;
+        border-radius: 8px;
+      }
+      .yoke-crosshair-h {
+        position: absolute;
+        top: 50%;
+        left: 6px;
+        right: 6px;
+        height: 1px;
+        background: rgba(148, 163, 184, 0.25);
+      }
+      .yoke-crosshair-v {
+        position: absolute;
+        left: 50%;
+        top: 6px;
+        bottom: 6px;
+        width: 1px;
+        background: rgba(148, 163, 184, 0.25);
+      }
+      .yoke-dot {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #38bdf8;
+        border: 2px solid #f8fafc;
+        border-radius: 999px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .rudder-bar {
+        position: relative;
+        width: 68px;
+        height: 10px;
+        background: #090d16;
+        border: 1px solid #334155;
+        border-radius: 4px;
+      }
+      .rudder-dot {
+        position: absolute;
+        top: 1px;
+        bottom: 1px;
+        width: 8px;
+        background: #facc15;
+        border-radius: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
       #gamepad-toast {
         display: none;
         position: absolute;
@@ -106,13 +321,13 @@
       #stall-banner {
         display: none;
         position: absolute;
-        top: 115px;
+        top: 84px;
         left: 50%;
         transform: translateX(-50%);
-        background: rgba(220, 38, 38, 0.92);
-        border: 1px solid #fca5a5;
+        background: rgba(220, 38, 38, 0.95);
+        border: 1.5px solid #fca5a5;
         color: white;
-        padding: 6px 18px;
+        padding: 7px 20px;
         border-radius: 8px;
         font-size: 14px;
         font-weight: 800;
@@ -139,54 +354,91 @@
       <canvas id="sim-canvas"></canvas>
       <div id="gamepad-toast">🎮 Mando conectado</div>
       <div id="stall-banner">⚠️ STALL / PÉRDIDA — BAJA LA NARIZ Y SUBE POTENCIA</div>
+
+      <!-- Indicadores Primarios Grandes a Izquierda (Velocidad) y Derecha (Altitud) -->
+      <div class="primary-flight-tapes">
+        <div class="pfd-box">
+          <div class="pfd-label">Velocidad (IAS)</div>
+          <div class="pfd-main-value" id="pfd-ias">0 KT</div>
+          <div class="pfd-sub" id="pfd-vref">Vr: 55 kt · Vy: 74 kt</div>
+        </div>
+        <div class="pfd-box" style="text-align: right">
+          <div class="pfd-label">Altura Pista (AGL)</div>
+          <div class="pfd-main-value" id="pfd-agl">0 FT</div>
+          <div class="pfd-sub" id="pfd-msl">MSL: 38 ft · VSI: 0 fpm</div>
+        </div>
+      </div>
+
       <div id="hud-overlay">
         <div class="top-bar">
           <div class="badge-panel">
-            <div class="badge-title">✈️ PISTA UNO — Fase 2 (Modelo de Vuelo 6-DOF + Controles + Debug)</div>
-            <div>Aeropuerto: <strong>MMMD (Mérida)</strong> · Pista <strong>10/28</strong> · Avión: <strong>Cessna 172S Skyhawk (180 HP)</strong></div>
-            <div style="color:#cbd5e1;margin-top:3px;">
-              ⌨️ <strong>Shift/Ctrl</strong>: Acelerador · <strong>S/W</strong> o <strong>↓/↑</strong>: Subir/Bajar nariz · <strong>A/D</strong>: Alabeo · <strong>Q/E</strong>: Timón · <strong>F/R</strong>: Flaps · <strong>P</strong>: Freno Estac. · <strong>C</strong>: Cámara · <strong>F3</strong>: Debug
+            <div class="badge-title">✈️ PISTA UNO — Cessna 172S Skyhawk · Aeropuerto de Mérida (MMMD Pista 10/28)</div>
+            <div style="color:#cbd5e1;margin-top:2px;">
+              ⌨️ <strong>Shift/Ctrl</strong>: Acelerador · <strong>S/W</strong> o <strong>↓/↑</strong>: Subir/Bajar nariz · <strong>A/D</strong>: Alabeo · <strong>Q/E</strong>: Timón · <strong>F/R</strong>: Flaps · <strong>B</strong>: Frenos · <strong>P</strong>: Parking · <strong>C</strong>: Cámara · <strong>F3</strong>: Debug
             </div>
           </div>
           <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
             <div class="badge-panel telemetry-row">
               <div>FPS: <strong id="fps-val">60</strong></div>
-              <div>Cámara: <strong id="cam-val">Persecución</strong></div>
-              <button id="reset-btn" class="btn-interactive">↺ Reiniciar en Cabecera 10 (Backspace)</button>
+              <div>Vista: <strong id="cam-val">Persecución</strong></div>
+              <button id="cam-btn" class="btn-interactive">🎥 Cámara (C)</button>
+              <button id="reset-btn" class="btn-interactive">↺ Cabecera 10 (Backspace)</button>
             </div>
-            <div id="debug-container" class="badge-panel"></div>
+            <div id="debug-container" class="badge-panel" style="display:none;"></div>
           </div>
         </div>
 
-        <div class="bottom-bar">
-          <div class="badge-panel flight-strip">
-            <div class="flight-metric">
-              <span>Velocidad (IAS)</span>
-              <strong id="hud-ias">0 kt</strong>
+        <!-- Tablero de Instrumentos Analógicos ("Six Pack") + Cuadrante de Controles Reales -->
+        <div class="cockpit-dashboard">
+          <div class="sixpack-panel">
+            <canvas id="instruments-canvas" width="700" height="128"></canvas>
+          </div>
+
+          <div class="pedestal-panel">
+            <!-- Palanca de Acelerador (Throttle) -->
+            <div class="control-column">
+              <span class="ctrl-title">Acelerador</span>
+              <div class="throttle-track" id="throttle-track" title="Arrastra o usa Shift / Ctrl">
+                <div class="throttle-fill" id="throttle-fill"></div>
+                <div class="throttle-knob" id="throttle-knob"></div>
+              </div>
+              <span class="ctrl-readout" id="throttle-readout">0%</span>
             </div>
-            <div class="flight-metric">
-              <span>Altitud (MSL / AGL)</span>
-              <strong id="hud-alt">38 / 0 ft</strong>
+
+            <!-- Palanca de Flaps (0°, 10°, 20°, 30°) -->
+            <div class="control-column">
+              <span class="ctrl-title">Flaps (F/R)</span>
+              <div class="flaps-detents">
+                <button class="flap-btn active" data-flap="0">0° UP</button>
+                <button class="flap-btn" data-flap="1">10° T/O</button>
+                <button class="flap-btn" data-flap="2">20° APP</button>
+                <button class="flap-btn" data-flap="3">30° LND</button>
+              </div>
+              <span class="ctrl-readout" id="flaps-readout">0°</span>
             </div>
-            <div class="flight-metric">
-              <span>Variómetro (VSI)</span>
-              <strong id="hud-vsi">0 ft/min</strong>
+
+            <!-- Rueda de Compensador (Pitch Trim) -->
+            <div class="control-column">
+              <span class="ctrl-title">Trim (T/G)</span>
+              <div class="trim-track">
+                <div class="trim-center-line"></div>
+                <div class="trim-marker" id="trim-marker"></div>
+              </div>
+              <span class="ctrl-readout" id="trim-readout">+2%</span>
             </div>
-            <div class="flight-metric">
-              <span>Cabeceo / Alabeo</span>
-              <strong id="hud-att">0° / 0°</strong>
-            </div>
-            <div class="flight-metric">
-              <span>Rumbo</span>
-              <strong id="hud-hdg">108°</strong>
-            </div>
-            <div class="flight-metric">
-              <span>Motor / Acelerador</span>
-              <strong id="hud-rpm">650 RPM (0%)</strong>
-            </div>
-            <div class="flight-metric">
-              <span>Flaps / Freno</span>
-              <strong id="hud-cfg">0° · LIBRE</strong>
+
+            <!-- Indicador de Cuerno (Yoke), Timón y Freno de Estacionamiento -->
+            <div class="control-column" style="gap:6px;">
+              <span class="ctrl-title">Cuerno / Timón</span>
+              <div class="yoke-box">
+                <div class="yoke-crosshair-h"></div>
+                <div class="yoke-crosshair-v"></div>
+                <div class="yoke-dot" id="yoke-dot"></div>
+              </div>
+              <div class="rudder-bar" title="Pedales de Timón (Q / E)">
+                <div class="rudder-dot" id="rudder-dot"></div>
+              </div>
+              <button class="brake-btn" id="parking-btn">🅿️ FRENO: LIBRE</button>
             </div>
           </div>
         </div>

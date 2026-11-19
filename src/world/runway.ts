@@ -60,14 +60,62 @@ export function createRunway(): {
   const asphaltMat = new THREE.MeshStandardMaterial({
     map: createAsphaltTexture(),
     roughness: 0.88,
-    metalness: 0.04
+    metalness: 0.04,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -1
   });
   const asphaltMesh = new THREE.Mesh(asphaltGeo, asphaltMat);
-  asphaltMesh.position.y = 0.03;
+  asphaltMesh.position.y = 0.04;
   asphaltMesh.receiveShadow = true;
   group.add(asphaltMesh);
 
-  const stripeMat = new THREE.MeshBasicMaterial({ color: 0xf1f5f9 });
+  // Calle de rodaje paralela Alpha (Taxiway A al norte de la pista 10/28) y plataforma FBO
+  const taxiwayMat = new THREE.MeshStandardMaterial({
+    color: 0x32343a,
+    roughness: 0.9,
+    metalness: 0.03
+  });
+  const parallelTaxi = new THREE.Mesh(
+    new THREE.PlaneGeometry(3100, 22).rotateX(-Math.PI / 2),
+    taxiwayMat
+  );
+  parallelTaxi.position.set(0, 0.032, -78);
+  group.add(parallelTaxi);
+
+  // Conectores de calle de rodaje hacia la pista
+  for (const connX of [-1510, -820, -120, 620, 1510]) {
+    const connector = new THREE.Mesh(
+      new THREE.PlaneGeometry(24, 65).rotateX(-Math.PI / 2),
+      taxiwayMat
+    );
+    connector.position.set(connX, 0.032, -45);
+    group.add(connector);
+  }
+
+  // Plataforma principal (Apron) frente a la terminal y hangares
+  const apron = new THREE.Mesh(
+    new THREE.PlaneGeometry(820, 95).rotateX(-Math.PI / 2),
+    taxiwayMat
+  );
+  apron.position.set(-380, 0.032, -135);
+  group.add(apron);
+
+  // Pista secundaria 18/36 que cruza MMMD
+  const crossRwy = new THREE.Mesh(
+    new THREE.PlaneGeometry(42, 2250).rotateX(-Math.PI / 2),
+    asphaltMat
+  );
+  crossRwy.position.set(220, 0.035, 220);
+  crossRwy.rotation.y = ((180 - 108) * Math.PI) / 180;
+  group.add(crossRwy);
+
+  const stripeMat = new THREE.MeshBasicMaterial({
+    color: 0xf1f5f9,
+    polygonOffset: true,
+    polygonOffsetFactor: -2,
+    polygonOffsetUnits: -2
+  });
 
   // Líneas de borde laterales (Edge stripes)
   const edgeGeo = new THREE.PlaneGeometry(rwy.lengthMeters - 40, 0.75);

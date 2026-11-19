@@ -5,6 +5,7 @@ import { createInitialFlightControls } from './controls/controlSmoothing';
 import { XboxGamepadController } from './controls/gamepad';
 import { KeyboardController } from './controls/keyboard';
 import { DebugPanel } from './debug/debugPanel';
+import { FlightInstrumentsHUD } from './hud/instruments';
 import {
   AircraftConfig,
   FlightSimulationState,
@@ -19,23 +20,35 @@ import { createTerrain } from './world/terrain';
 const c172Config = c172ConfigJson as unknown as AircraftConfig;
 
 const canvas = document.getElementById('sim-canvas') as HTMLCanvasElement;
+const instrumentsCanvas = document.getElementById('instruments-canvas') as HTMLCanvasElement;
 const fpsEl = document.getElementById('fps-val') as HTMLElement;
 const camEl = document.getElementById('cam-val') as HTMLElement;
+const camBtn = document.getElementById('cam-btn') as HTMLButtonElement;
 const debugContainer = document.getElementById('debug-container') as HTMLElement;
 const gamepadToast = document.getElementById('gamepad-toast') as HTMLElement;
 const stallBanner = document.getElementById('stall-banner') as HTMLElement;
 const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement;
 
-// Elementos del HUD rápido inferior
-const hudIas = document.getElementById('hud-ias') as HTMLElement;
-const hudAlt = document.getElementById('hud-alt') as HTMLElement;
-const hudVsi = document.getElementById('hud-vsi') as HTMLElement;
-const hudAtt = document.getElementById('hud-att') as HTMLElement;
-const hudHdg = document.getElementById('hud-hdg') as HTMLElement;
-const hudRpm = document.getElementById('hud-rpm') as HTMLElement;
-const hudCfg = document.getElementById('hud-cfg') as HTMLElement;
+// Indicadores Primarios Laterales (PFD)
+const pfdIas = document.getElementById('pfd-ias') as HTMLElement;
+const pfdVref = document.getElementById('pfd-vref') as HTMLElement;
+const pfdAgl = document.getElementById('pfd-agl') as HTMLElement;
+const pfdMsl = document.getElementById('pfd-msl') as HTMLElement;
 
-// 1. Renderizador WebGL2 con Tone Mapping ACES para iluminación realista
+// Controles del Pedestal (Acelerador, Flaps, Trim, Yoke, Freno)
+const throttleTrack = document.getElementById('throttle-track') as HTMLElement;
+const throttleFill = document.getElementById('throttle-fill') as HTMLElement;
+const throttleKnob = document.getElementById('throttle-knob') as HTMLElement;
+const throttleReadout = document.getElementById('throttle-readout') as HTMLElement;
+const flapButtons = Array.from(document.querySelectorAll('.flap-btn')) as HTMLButtonElement[];
+const flapsReadout = document.getElementById('flaps-readout') as HTMLElement;
+const trimMarker = document.getElementById('trim-marker') as HTMLElement;
+const trimReadout = document.getElementById('trim-readout') as HTMLElement;
+const yokeDot = document.getElementById('yoke-dot') as HTMLElement;
+const rudderDot = document.getElementById('rudder-dot') as HTMLElement;
+const parkingBtn = document.getElementById('parking-btn') as HTMLButtonElement;
+
+// 1. Renderizador WebGL2 con Tone Mapping ACES
 const renderer = new THREE.WebGLRenderer({
   canvas,
   antialias: true,
@@ -48,7 +61,7 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
 
-// 2. Escena 3D, Cielo, Terreno de Yucatán y Pista 10/28 de Mérida (MMMD)
+// 2. Escena 3D, Cielo, Paisaje Yucateco con Ciudad de Mérida y Pista 10/28 de MMMD
 const scene = new THREE.Scene();
 const { sunLight } = setupSkyAndLighting(scene);
 scene.add(createTerrain());
@@ -56,7 +69,7 @@ scene.add(createTerrain());
 const { runwayGroup, runwayHeadingYawRad, threshold10WorldPos } = createRunway();
 scene.add(runwayGroup);
 
-// 3. Modelo 3D detallado del Cessna 172S Skyhawk con superficies móviles
+// 3. Modelo 3D detallado del Cessna 172S Skyhawk
 const c172Rig = createC172Mesh();
 scene.add(c172Rig.aircraftGroup);
 
@@ -72,8 +85,11 @@ const CAMERA_NAMES = ['Persecución', 'Cabina', 'Torre MMMD'];
 const cameraPosSmooth = new THREE.Vector3();
 const cameraLookSmooth = new THREE.Vector3();
 
-// 5. Panel de Debug (F3) y Vectores 3D de Fuerza
+// 5. Instrumentos Analógicos ("Six Pack") y Panel de Debug (F3)
+const instrumentsHud = new FlightInstrumentsHUD(instrumentsCanvas);
 const debugPanel = new DebugPanel(scene, debugContainer);
+// Arrancar con el panel F3 oculto para dejar limpia la vista de vuelo (se abre con F3)
+debugPanel.toggle();
 
 // 6. Estado de Simulación y Controles
 let controls = createInitialFlightControls();
@@ -115,9 +131,44 @@ function toggleCamera(): void {
   camEl.textContent = CAMERA_NAMES[cameraMode];
 }
 
+camBtn.addEventListener('click', () => {
+  toggleCamera();
+  camBtn.blur();
+});
+
 resetBtn.addEventListener('click', () => {
   resetToRunway10();
   resetBtn.blur();
+});
+
+// Interacción con el mouse sobre el Acelerador, Flaps y Freno de Estacionamiento
+let draggingThrottle = false;
+function setThrottleFromPointer(clientY: number): void {
+  const rect = throttleTrack.getBoundingClientRect();
+  const rel = 1 - (clientY - rect.top) / rect.height;
+  controls.throttle = Math.max(0, Math.min(1, rel));
+}
+throttleTrack.addEventListener('pointerdown', (e) => {
+  draggingThrottle = true;
+  setThrottleFromPointer(e.clientY);
+});
+window.addEventListener('pointermove', (e) => {
+  if (draggingThrottle) setThrottleFromPointer(e.clientY);
+});
+window.addEventListener('pointerup', () => {
+  draggingThrottle = false;
+});
+
+for (const btn of flapButtons) {
+  btn.addEventListener('click', () => {
+    controls.flapIndex = Number(btn.dataset.flap ?? 0);
+    btn.blur();
+  });
+}
+
+parkingBtn.addEventListener('click', () => {
+  controls.parkingBrake = !controls.parkingBrake;
+  parkingBtn.blur();
 });
 
 const keyboard = new KeyboardController({
@@ -159,7 +210,6 @@ function updateCamera(
   const worldUp = new THREE.Vector3(0, 1, 0);
 
   if (cameraMode === 0) {
-    // Cámara de Persecución Suavizada
     const desiredCamPos = renderedPos
       .clone()
       .addScaledVector(forward, -12.8)
@@ -176,7 +226,6 @@ function updateCamera(
     camera.position.copy(cameraPosSmooth);
     camera.lookAt(cameraLookSmooth);
   } else if (cameraMode === 1) {
-    // Cámara de Cabina desde el asiento del piloto + rotación de mirada libre (stick derecho)
     const eyeWorld = new THREE.Vector3();
     c172Rig.cockpitCameraAnchor.getWorldPosition(eyeWorld);
     camera.position.copy(eyeWorld);
@@ -187,7 +236,6 @@ function updateCamera(
       .addScaledVector(up, Math.sin(gamepad.lookPitchRad) - 0.06);
     camera.lookAt(eyeWorld.clone().addScaledVector(lookDir, 50));
   } else {
-    // Cámara de Torre Fija junto a la pista 10/28
     camera.position.set(-1050, 26, -390);
     camera.lookAt(renderedPos);
   }
@@ -196,24 +244,67 @@ function updateCamera(
   sunLight.target.updateMatrixWorld();
 }
 
-function updateBottomHud(state: FlightSimulationState): void {
+function updateCockpitUI(state: FlightSimulationState): void {
   const t = state.telemetry;
-  hudIas.textContent = `${Math.round(t.iasKnots)} kt`;
-  hudAlt.textContent = `${Math.round(t.altitudeFeetMSL)} / ${Math.round(t.altitudeFeetAGL)} ft`;
-  hudVsi.textContent = `${Math.round(t.verticalSpeedFpm)} ft/min`;
-  hudAtt.textContent = `${t.pitchDeg.toFixed(1)}° / ${t.rollDeg.toFixed(1)}°`;
-  hudHdg.textContent = `${Math.round(t.headingDeg).toString().padStart(3, '0')}°`;
-  hudRpm.textContent = `${Math.round(state.engine.rpm)} RPM (${Math.round(controls.throttle * 100)}%)`;
+  const ias = Math.round(t.iasKnots);
+  const agl = Math.round(t.altitudeFeetAGL);
+  const msl = Math.round(t.altitudeFeetMSL);
+  const vsi = Math.round(t.verticalSpeedFpm / 10) * 10;
 
+  // Cintas laterales grandes de lectura rápida
+  pfdIas.textContent = `${ias} KT`;
+  pfdIas.style.color = t.isStalling ? '#ef4444' : ias >= 55 ? '#4ade80' : '#f8fafc';
+  pfdVref.textContent = t.gear.anyWheelOnGround
+    ? ias < 55
+      ? `Acelera a Vr (55 kt)`
+      : `¡LISTO PARA ROTAR (S / ↓)!`
+    : `Vy: 74 kt · Vapp: 63 kt`;
+
+  pfdAgl.textContent = `${agl} FT`;
+  const vsiSign = vsi > 0 ? '+' : '';
+  pfdMsl.textContent = `MSL: ${msl} ft · VSI: ${vsiSign}${vsi} fpm`;
+
+  // Acelerador visual
+  const thrPct = Math.round(controls.throttle * 100);
+  throttleFill.style.height = `${thrPct}%`;
+  throttleKnob.style.bottom = `${thrPct}%`;
+  throttleReadout.textContent = `${thrPct}%`;
+
+  // Flaps visual
   const flapDeg = [0, 10, 20, 30][controls.flapIndex] ?? 0;
-  const brakeLabel = controls.parkingBrake
-    ? '🅿️ PARK'
+  flapsReadout.textContent = `${flapDeg}°`;
+  flapButtons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === controls.flapIndex);
+  });
+
+  // Trim visual
+  const trimPct = Math.round(controls.elevatorTrim * 100);
+  const trimTopPct = 50 - (controls.elevatorTrim / 0.4) * 42;
+  trimMarker.style.top = `${Math.max(6, Math.min(94, trimTopPct))}%`;
+  trimReadout.textContent = `${trimPct >= 0 ? '+' : ''}${trimPct}%`;
+
+  // Posición del cuerno (Yoke) y pedales de timón
+  const yokeX = 50 + controls.aileron * 40;
+  const yokeY = 50 + controls.elevator * 40;
+  yokeDot.style.left = `${yokeX}%`;
+  yokeDot.style.top = `${yokeY}%`;
+
+  const rudderX = 50 + controls.rudder * 42;
+  rudderDot.style.left = `${rudderX}%`;
+
+  // Freno de estacionamiento o freno de pedal
+  const isBraking = controls.parkingBrake || controls.brakeLeft > 0 || controls.brakeRight > 0;
+  parkingBtn.classList.toggle('engaged', isBraking);
+  parkingBtn.textContent = controls.parkingBrake
+    ? '🅿️ PARK: ACTIVO'
     : controls.brakeLeft > 0 || controls.brakeRight > 0
-      ? '🛑 FRENO'
-      : 'LIBRE';
-  hudCfg.textContent = `${flapDeg}° · ${brakeLabel}`;
+      ? '🛑 FRENANDO'
+      : '🅿️ FRENO: LIBRE';
 
   stallBanner.style.display = t.stallWarning ? 'block' : 'none';
+
+  // Renderizar los 6 instrumentos analógicos ("Six Pack")
+  instrumentsHud.render(state, controls);
 }
 
 // 7. Loop Principal con Acumulador a 120 Hz
@@ -229,11 +320,9 @@ function animate(nowMs: number): void {
   lastFrameTimeMs = nowMs;
   accumulator += frameDt;
 
-  // Actualizar entradas de teclado y mando de Xbox
   keyboard.update(controls, frameDt);
   gamepad.update(controls, frameDt);
 
-  // Vibración háptica en pérdida o toque de pista
   if (currSimState.telemetry.stallBuffetIntensity > 0.1) {
     gamepad.pulseVibration(
       currSimState.telemetry.stallBuffetIntensity * 0.5,
@@ -245,7 +334,6 @@ function animate(nowMs: number): void {
     gamepad.pulseVibration(impact * 0.6, impact, 140);
   }
 
-  // Paso fijo de física a 120 Hz
   while (accumulator >= FIXED_DT) {
     prevSimState = currSimState;
     currSimState = stepFlightSimulation(
@@ -258,7 +346,6 @@ function animate(nowMs: number): void {
     accumulator -= FIXED_DT;
   }
 
-  // Interpolación visual entre prevSimState y currSimState
   const alpha = accumulator / FIXED_DT;
   const interpPos = lerpVec3(prevSimState.rigidBody.position, currSimState.rigidBody.position, alpha);
 
@@ -270,12 +357,10 @@ function animate(nowMs: number): void {
     currSimState.rigidBody.orientation.w
   );
 
-  // Animar hélice, alerones, flaps, elevador y timón en el modelo 3D
   updateC172RigVisuals(c172Rig, controls, currSimState.engine.rpm, frameDt);
   updateCamera(c172Rig.aircraftGroup.position, c172Rig.aircraftGroup.quaternion, frameDt);
 
-  // Actualizar HUD y panel de Debug F3
-  updateBottomHud(currSimState);
+  updateCockpitUI(currSimState);
   debugPanel.update(currSimState, controls, c172Rig.aircraftGroup.position);
 
   fpsFrames++;
